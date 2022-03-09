@@ -11,10 +11,13 @@ Sử dụng hàm move_image để lưu các nhóm ảnh thành folder theo nhãn
 
 # web
 Sử dụng stremlit
+
 Vẫn đang gặp khó khăn
 
 # Tài liệu tham khảo
 https://pyimagesearch.com/2018/07/09/face-clustering-with-python/
+
+https://phamdinhkhanh.github.io/2020/03/12/faceNetAlgorithm.html
 
 https://phamdinhkhanh.github.io/deepai-book/ch_ml/DBSCAN.html
 
