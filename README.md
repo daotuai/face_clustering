@@ -9,5 +9,11 @@ Sử dụng hàm build_montages của imutils để tạo ra ảnh chứa 5 × 5
 
 Sử dụng hàm move_image để lưu các nhóm ảnh thành folder theo nhãn
 
+# web
+Sử dụng stremlit
+Vẫn đang gặp khó khăn
+
 # Tài liệu tham khảo
 https://pyimagesearch.com/2018/07/09/face-clustering-with-python/
+
+
