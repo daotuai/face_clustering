@@ -13,22 +13,15 @@ import shutil
 import os
 from constants import FACE_DATA_PATH, ENCODINGS_PATH, CLUSTERING_RESULT_PATH
 
-# add constants file in the code (clustering_result)
 
 def move_image(image,id,labelID):
 
 	path = CLUSTERING_RESULT_PATH+'/persion'+str(labelID)
-	# os.path.exists() method in Python is used to check whether the specified path exists or not.
-	# os.mkdir() method in Python is used to create a directory named path with the specified numeric mode.
 	if os.path.exists(path) == False:
 		os.mkdir(path)
 
 	filename = str(id) +'.jpg'
-	# Using cv2.imwrite() method
-	# Saving the image
-
 	cv2.imwrite(os.path.join(path , filename), image)
-
 	return
 
 
@@ -39,9 +32,6 @@ ap.add_argument("-e", "--encodings", required=True,
 ap.add_argument("-j", "--jobs", type=int, default=-1,
 	help="# of parallel jobs to run (-1 will use all CPUs)")
 args = vars(ap.parse_args())
-
-# load the serialized face encodings + bounding box locations from
-# disk/encodings pickle file, then extract the set of encodings to so we can cluster on them
 
 print("[INFO] loading encodings...")
 data = pickle.loads(open(args["encodings"], "rb").read())
@@ -55,25 +45,13 @@ print("[INFO] clustering...")
 clt = DBSCAN(eps=0.5, min_samples=1, metric="euclidean", n_jobs=args["jobs"])
 clt.fit(encodings)
 
-# determine the total number of unique faces found in the dataset
-# clt.labels_ contains the label ID for all faces in our dataset (i.e., which cluster each face belongs to).
-# To find the unique faces/unique label IDs, used NumPy’s unique function.
-# The result is a list of unique labelIDs
 labelIDs = np.unique(clt.labels_)
-
-# we count the numUniqueFaces . There could potentially be a value of -1 in labelIDs — this value corresponds
-# to the “outlier” class where a 128-d embedding was too far away from any other clusters to be added to it.
-# “outliers” could either be worth examining or simply discarding based on the application of face clustering.
-
 
 numUniqueFaces = len(np.where(labelIDs > -1)[0])
 print("[INFO] # unique faces: {}".format(numUniqueFaces))
 
 # loop over the unique face integers
 for labelID in labelIDs:
-	# find all indexes into the `data` array that belong to the
-	# current label ID, then randomly sample a maximum of 25 indexes
-	# from the set
 	print("[INFO] faces for face ID: {}".format(labelID))
 	idxs = np.where(clt.labels_ == labelID)[0]
 	idxs = np.random.choice(idxs, size=min(25, len(idxs)),
