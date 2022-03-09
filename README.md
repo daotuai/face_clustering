@@ -16,4 +16,6 @@ Vẫn đang gặp khó khăn
 # Tài liệu tham khảo
 https://pyimagesearch.com/2018/07/09/face-clustering-with-python/
 
+https://phamdinhkhanh.github.io/deepai-book/ch_ml/DBSCAN.html
+
 
